@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/groupgrades/db" VERSION="20250702" COMMENT="XMLDB file for local_groupgrades"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="local_groupgrades" COMMENT="Stores group-specific grade adjustment rules per course">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"
+               COMMENT="Primary key"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
+               COMMENT="Foreign key to course.id"/>
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
+               COMMENT="Foreign key to groups.id"/>
+        <FIELD NAME="gradeitemid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
+               COMMENT="Target grade item to override (e.g. Course Total)"/>
+        <FIELD NAME="rule_type" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false"
+               COMMENT="Rule type: factor_multiplier, bonus_points, or top_n_of_m"/>
+        <FIELD NAME="rule_value" TYPE="number" LENGTH="10" DECIMALS="5" NOTNULL="true" SEQUENCE="false"
+               COMMENT="For factor/bonus: the numeric value. For top_n_of_m: N (how many top grades to average)"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"
+               COMMENT="Unix timestamp of last modification"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseid_groupid" UNIQUE="false" FIELDS="courseid, groupid"
+               COMMENT="Fast lookup of rules by course and group"/>
+        <INDEX NAME="gradeitemid" UNIQUE="false" FIELDS="gradeitemid"
+               COMMENT="Fast lookup by target grade item"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="local_groupgrades_items" COMMENT="Pool grade items for top_n_of_m rules">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"
+               COMMENT="Primary key"/>
+        <FIELD NAME="ruleid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
+               COMMENT="Foreign key to local_groupgrades.id"/>
+        <FIELD NAME="gradeitemid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
+               COMMENT="Grade item that belongs to the pool for this rule"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="ruleid" UNIQUE="false" FIELDS="ruleid"
+               COMMENT="Fast lookup of pool items by rule"/>
+        <INDEX NAME="gradeitemid" UNIQUE="false" FIELDS="gradeitemid"
+               COMMENT="Fast lookup — which rules include this item in their pool"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
