@@ -29,7 +29,7 @@
  *    - top_n_count      (N — how many top grades to average)
  *
  * @package   local_groupgrades
- * @copyright 2025 Your Name
+ * @copyright 2026 Talia Yohanan
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

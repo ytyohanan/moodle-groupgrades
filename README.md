@@ -98,14 +98,15 @@ local/groupgrades/
 ├── classes/
 │   ├── form/
 │   │   └── rule_form.php       # Moodle form for adding rules
+│   ├── privacy/
+│   │   └── provider.php        # Privacy API implementation
 │   └── observer.php            # Core logic: handles grade events and applies rules
 ├── db/
 │   ├── events.php              # Registers the user_graded event observer
 │   ├── install.xml             # Database schema (2 tables)
 │   └── upgrade.php             # DB upgrade steps for future versions
 ├── lang/
-│   ├── en/local_groupgrades.php  # English strings
-│   └── he/local_groupgrades.php  # Hebrew strings
+│   └── en/local_groupgrades.php  # English strings
 ├── lib.php                     # Navigation hook (adds link in course menu)
 ├── manage.php                  # Teacher management page (list + add + delete rules)
 ├── version.php                 # Plugin version metadata
@@ -121,7 +122,7 @@ local/groupgrades/
 
 ## Bug Reports
 
-Please open an issue on the [GitHub Issues](../../issues) page.
+Please open an issue on the [GitHub Issues](https://github.com/ytyohanan/moodle-groupgrades/issues) page.
 Include your Moodle version, PHP version, and a description of the steps to reproduce the problem.
 
 ## License

@@ -18,7 +18,7 @@
  * Plugin version and other metadata.
  *
  * @package   local_groupgrades
- * @copyright 2025 Your Name
+ * @copyright 2026 Talia Yohanan
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
